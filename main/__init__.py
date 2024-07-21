@@ -6,7 +6,6 @@ import time
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-print(config("HHH",default=None))
 # variables
 API_ID = config("API_ID", default=None, cast=int)
 API_HASH = config("API_HASH", default=None)
