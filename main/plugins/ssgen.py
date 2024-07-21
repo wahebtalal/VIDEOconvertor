@@ -50,9 +50,9 @@ async def ssgen(video, time_stamp):
         None       
         
 async def screenshot(event, msg):
-    Drone = event.client
+    heebow = event.client
     name = dt.now().isoformat("_", "seconds") + ".mp4"
-    edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
+    edit = await heebow.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
     if hasattr(msg.media, "document"):
         file = msg.media.document
     else:
@@ -60,7 +60,7 @@ async def screenshot(event, msg):
     if msg.file.name:
         name = msg.file.name
     try:
-        await fast_download(name, file, Drone, edit, time.time(), "**DOWNLOADING:**")
+        await fast_download(name, file, heebow, edit, time.time(), "**DOWNLOADING:**")
     except Exception as e:
         print(e)
         return await edit.edit(f"An error occured while downloading.") 
@@ -75,7 +75,7 @@ async def screenshot(event, msg):
             captions.append(f'screenshot at {hhmmss(duration/n[i])}')
             await edit.edit(f"`{i+1}` screenshot generated.")
     if len(pictures) > 0:
-        await Drone.send_file(event.chat_id, pictures, caption=captions)
+        await heebow.send_file(event.chat_id, pictures, caption=captions)
     else:
         await edit.edit("No screenshots could be generated!")
     await edit.delete()

@@ -2,7 +2,7 @@ import glob
 from pathlib import Path
 from main.utils import load_plugins
 import logging
-from . import Drone
+from . import heebow
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -19,4 +19,4 @@ print("Successfully deployed!")
 print("@wahiebtalal ")
 
 if __name__ == "__main__":
-    Drone.run_until_disconnected()
+    heebow.run_until_disconnected()

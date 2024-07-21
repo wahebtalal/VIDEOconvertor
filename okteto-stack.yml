@@ -1,5 +1,5 @@
 services:
-  drone-vc-p:
+  heebow-vc-p:
     build: .
     environment:
       API_ID: $API_ID  

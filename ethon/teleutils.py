@@ -9,7 +9,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
 General Public License for more details.
 License can be found in < https://github.com/vasusen-code/ethon/blob/main/LICENSE > ."""
 
-#vasusen-code/thechariotoflight/dronebots
+#vasusen-code/thechariotoflight/heebowbots
 #__TG:ChauhanMahesh__
 from telethon import events
 

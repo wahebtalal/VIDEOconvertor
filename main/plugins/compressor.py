@@ -28,8 +28,8 @@ from main.plugins.actions import LOG_START, LOG_END
 async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
     if ps_name is None:
         ps_name = '**COMPRESSING:**'
-    Drone = event.client
-    edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
+    heebow = event.client
+    edit = await heebow.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
     new_name = "out_" + dt.now().isoformat("_", "seconds")
     if hasattr(msg.media, "document"):
         file = msg.media.document
@@ -59,7 +59,7 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
     log = await LOG_START(event, f'**{str(_ps)} PROCESS STARTED**\n\n[Bot is busy now]({SUPPORT_LINK})')
     log_end_text = f'**{_ps} PROCESS FINISHED**\n\n[Bot is free now]({SUPPORT_LINK})'
     try:
-        await fast_download(n, file, Drone, edit, DT, "**DOWNLOADING:**")
+        await fast_download(n, file, heebow, edit, DT, "**DOWNLOADING:**")
     except Exception as e:
         os.rmdir("encodemedia")
         await log.delete()
@@ -113,8 +113,8 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
     await log.edit("Uploading file.")
     if 'x-matroska' in mime:
         try:
-            uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
-            await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
+            uploader = await fast_upload(f'{out2}', f'{out2}', UT, heebow, edit, '**UPLOADING:**')
+            await heebow.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
         except Exception as e:
             await log.delete()
             await LOG_END(event, log_end_text)
@@ -123,8 +123,8 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
             return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     elif 'webm' in mime:
         try:
-            uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
-            await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
+            uploader = await fast_upload(f'{out2}', f'{out2}', UT, heebow, edit, '**UPLOADING:**')
+            await heebow.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
         except Exception as e:
             await log.delete()
             await LOG_END(event, log_end_text)
@@ -138,12 +138,12 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
         duration = metadata["duration"]
         attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
         try:
-            uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
-            await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG3, attributes=attributes, force_document=False)
+            uploader = await fast_upload(f'{out2}', f'{out2}', UT, heebow, edit, '**UPLOADING:**')
+            await heebow.send_file(event.chat_id, uploader, caption=text, thumb=JPG3, attributes=attributes, force_document=False)
         except Exception:
             try:
-                uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
-                await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
+                uploader = await fast_upload(f'{out2}', f'{out2}', UT, heebow, edit, '**UPLOADING:**')
+                await heebow.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
             except Exception as e:
                 await log.delete()
                 await LOG_END(event, log_end_text)

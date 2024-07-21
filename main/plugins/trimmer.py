@@ -22,13 +22,13 @@ from ethon.telefunc import fast_download, fast_upload
 from ethon.pyfunc import video_metadata, bash
 from ethon.pyutils import rename
 
-from .. import Drone, BOT_UN
+from .. import heebow, BOT_UN
 
 from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2, JPG3
 
 async def trim(event, msg, st, et):
-    Drone = event.client
-    edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
+    heebow = event.client
+    edit = await heebow.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
     new_name = "out_" + dt.now().isoformat("_", "seconds")
     if hasattr(msg.media, "document"):
         file = msg.media.document
@@ -53,7 +53,7 @@ async def trim(event, msg, st, et):
         out = new_name + ext
     DT = time.time()
     try:
-        await fast_download(name, file, Drone, edit, DT, "**DOWNLOADING:**")
+        await fast_download(name, file, heebow, edit, DT, "**DOWNLOADING:**")
     except Exception as e:
         print(e)
         return await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False) 
@@ -73,12 +73,12 @@ async def trim(event, msg, st, et):
         height = metadata["height"]
         duration = metadata["duration"]
         attributes = [DocumentAttributeVideo(duration=duration, w=width, h=height, supports_streaming=True)]
-        uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
-        await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG3, attributes=attributes, force_document=False)
+        uploader = await fast_upload(f'{out2}', f'{out2}', UT, heebow, edit, '**UPLOADING:**')
+        await heebow.send_file(event.chat_id, uploader, caption=text, thumb=JPG3, attributes=attributes, force_document=False)
     except Exception:
         try:
-            uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
-            await Drone.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
+            uploader = await fast_upload(f'{out2}', f'{out2}', UT, heebow, edit, '**UPLOADING:**')
+            await heebow.send_file(event.chat_id, uploader, caption=text, thumb=JPG, force_document=True)
         except Exception as e:
             print(e)
             return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
