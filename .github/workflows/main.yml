@@ -1,4 +1,4 @@
-name: Privat tahue heebow/vv2
+name: Public wahiebtalal heebow/vv
 
 on:
   workflow_dispatch:
@@ -33,4 +33,4 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: heebow/vv2:latest ,heebow/vv2:${{github.run_number}}
+          tags: heebow/vv:latest ,heebow/vv:${{github.run_number}}
