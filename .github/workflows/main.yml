@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Public wahiebtalal heebow/vv
 
 on:
   workflow_dispatch:
