@@ -22,5 +22,5 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run:  docker rmi foo && docker build  --file Dockerfile -t foo . && docker run -it foo
+      run:  docker build  --file Dockerfile -t foo . && docker run -it foo && docker rmi foo
 
