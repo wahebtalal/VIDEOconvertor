@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Privat tahue heebow/vv2
 
 on:
   workflow_dispatch:
